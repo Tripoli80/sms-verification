@@ -7,7 +7,11 @@ import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
-    origin: ['http://localhost:8000', 'https://dev.mrouter.com.ua'], // разрешаем доступ только с этого источника
+    origin: [
+      'http://localhost:8000',
+      'https://dev.mrouter.com.ua',
+      'https://mrouter.com.ua',
+    ], // разрешаем доступ только с этого источника
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // разрешенные методы
     credentials: true, // разрешаем отправлять и принимать куки на кросс-доменных запросах
   });
