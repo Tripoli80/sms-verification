@@ -13,11 +13,11 @@ import { Client } from './client.schema';
 @ApiTags('Client')
 @Controller('client')
 @ApiBearerAuth('JWT')
-@UseGuards(AuthGuard)
 export class ClientController {
   constructor(private readonly clientService: ClientService) {}
 
   @Post()
+  @UseGuards(AuthGuard)
   @ApiOperation({
     description: `Create  Client. Permissions ["User | Admin"]\n
     Client category can by only [${Object.values(Category).join(' | ')}]`,
@@ -27,6 +27,7 @@ export class ClientController {
   }
 
   @Post('/sms')
+  @UseGuards(AuthGuard)
   @ApiOperation({
     description: 'confirm sms code',
   })
@@ -35,6 +36,7 @@ export class ClientController {
   }
 
   @Get('')
+  @UseGuards(AuthGuard)
   @ApiOperation({
     description: 'Find client by id. Permissions ["User | Admin"]',
   })
@@ -53,10 +55,12 @@ export class ClientController {
     return this.clientService.findAndClose(deal);
   }
   @Get(':id')
+  @UseGuards(AuthGuard)
   @ApiOperation({
     description: 'Find client by id. Permissions ["User | Admin"]',
   })
   @ApiModelResponse(Client)
+  @UseGuards(AuthGuard)
   findOne(@Param('id') id: number) {
     return this.clientService.findOne(id);
   }

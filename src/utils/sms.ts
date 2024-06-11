@@ -1,4 +1,6 @@
 export const sms = async (code: string, phone: string) => {
+  // console.log("🚀 ~ code:", code)
+  // return
   const token = process.env.SMSTOKEN;
   const url = 'https://im.smsclub.mobi/sms/send';
 

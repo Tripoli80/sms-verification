@@ -61,6 +61,7 @@ export class ClientService implements IClientServiceInterface {
       if (client?.code) delete client.code;
       return {
         success: !!client,
+        isRepetOrder: true,
         data: client,
       };
     }
@@ -82,12 +83,11 @@ export class ClientService implements IClientServiceInterface {
       client.deal = '';
     }
     await sms(`${code}`, client.phone);
-
-
     await this.clientRep.save(client);
     if (client?.code) delete client.code;
     return {
       success: !!client,
+      isRepetOrder: false,
       data: client,
     };
   }
