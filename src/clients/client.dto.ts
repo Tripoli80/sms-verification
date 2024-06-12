@@ -7,6 +7,11 @@ export class CreateClientDto implements Partial<Client> {
   @IsString()
   domen: string;
 
+  @ApiProperty()
+  @IsString()
+  @IsOptional()
+  alfa: string;
+
   @ApiProperty({ example: 'Ethan' })
   @IsString()
   name: string;
@@ -44,6 +49,11 @@ export class UpdateClientDto implements Partial<Client> {
   @IsOptional()
   @IsString()
   domen: string;
+  
+  @ApiProperty()
+  @IsString()
+  @IsOptional()
+  alfa: string;
 
   @ApiProperty({ example: 'Pizza' })
   @IsOptional()

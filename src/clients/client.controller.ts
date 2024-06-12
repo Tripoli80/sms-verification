@@ -42,7 +42,6 @@ export class ClientController {
   })
   @ApiModelResponse(Client)
   findAll() {
-    console.log('object');
     return this.clientService.findAll();
   }
 

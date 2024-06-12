@@ -1,4 +1,4 @@
-export const sms = async (code: string, phone: string) => {
+export const sms = async (code: string, phone: string, alfa?: string) => {
   // console.log("🚀 ~ code:", code)
   // return
   const token = process.env.SMSTOKEN;
@@ -7,7 +7,7 @@ export const sms = async (code: string, phone: string) => {
   const data = {
     phone: [phone],
     message: code + ' - CODE VERIFICATION ',
-    src_addr: 'VashZakaz',
+    src_addr: alfa ? alfa : process.env.ALFA,
   };
 
   fetch(url, {
@@ -20,9 +20,10 @@ export const sms = async (code: string, phone: string) => {
   })
     .then(response => response.json())
     .then(result => {
-      console.log(result);
+      return !!result;
     })
     .catch(error => {
       console.error('Error:', error);
+      return false;
     });
 };

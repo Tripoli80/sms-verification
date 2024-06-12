@@ -25,11 +25,12 @@ export class ClientService implements IClientServiceInterface {
     return client[client.length - 1];
   }
 
-  async handler(createClientDto: CreateClientDto) {
-    let client = await this.isExistByPhone(
-      createClientDto.phone,
-      createClientDto.domen,
-    );
+  async handler(createClientDto: CreateClientDto) {    
+    if (!createClientDto?.alfa) createClientDto.alfa = process.env.ALFA;
+      let client = await this.isExistByPhone(
+        createClientDto.phone,
+        createClientDto.domen,
+      );
     if (client && client?.deal && client?.isOpen) {
       return {
         success: !!client,
@@ -82,7 +83,7 @@ export class ClientService implements IClientServiceInterface {
       client.isOpen = false;
       client.deal = '';
     }
-    await sms(`${code}`, client.phone);
+    await sms(`${code}`, client.phone, createClientDto.alfa);
     await this.clientRep.save(client);
     if (client?.code) delete client.code;
     return {
