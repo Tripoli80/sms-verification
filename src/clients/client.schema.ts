@@ -51,6 +51,10 @@ export class Client {
   @ApiProperty()
   amount: number;
 
+  @Column( { type: String, default:"" })
+  @ApiProperty()
+  product: string;
+
   @CreateDateColumn()
   @ApiProperty({ type: String, format: 'date-time' })
   createdAt: Date;

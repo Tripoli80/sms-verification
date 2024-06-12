@@ -49,7 +49,7 @@ export class ClientService implements IClientServiceInterface {
       client.isOpen = true;
 
       const tittle = `Заказ(повторный) от ${client.name} [${client.domen}]`;
-      const comment = `Заказ на сумму ${client.amount}. С сайта ${client.domen}`;
+      const comment = `Заказ на сумму ${client.amount}. С сайта ${client.domen} [ ${JSON.stringify(createClientDto)} ]`;
       client.deal = (
         await this.b24.createDeal(
           tittle,
@@ -123,7 +123,7 @@ export class ClientService implements IClientServiceInterface {
         ).toString();
       }
       const tittle = `Заказ от ${client.name} [${domen}]`;
-      const comment = `Заказ на сумму ${client.amount}. С сайта ${client.domen}`;
+      const comment = `Заказ на сумму ${client.amount}. С сайта ${client.domen} [ Product: ${client?.product||"noname"} ]`;
       client.deal = (
         await this.b24.createDeal(
           tittle,
