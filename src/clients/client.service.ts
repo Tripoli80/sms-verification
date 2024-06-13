@@ -25,12 +25,13 @@ export class ClientService implements IClientServiceInterface {
     return client[client.length - 1];
   }
 
-  async handler(createClientDto: CreateClientDto) {    
+  async handler(createClientDto: CreateClientDto) {
+    let client = null;
     if (!createClientDto?.alfa) createClientDto.alfa = process.env.ALFA;
-      let client = await this.isExistByPhone(
-        createClientDto.phone,
-        createClientDto.domen,
-      );
+    client = await this.isExistByPhone(
+      createClientDto.phone,
+      createClientDto.domen,
+    );
     if (client && client?.deal && client?.isOpen) {
       return {
         success: !!client,
@@ -39,6 +40,7 @@ export class ClientService implements IClientServiceInterface {
     }
     if (client && client?.deal && !client?.isOpen) {
       // client = this.clientRep.create(createClientDto);
+      console.log("🚀 ~ client.contact:", client.contact)
       const contact = await this.b24.getContactById(client.contact);
       if (!contact?.ID) {
         client.contact = (
@@ -115,6 +117,7 @@ export class ClientService implements IClientServiceInterface {
       client.confirmed = true;
       client.isOpen = true;
       const contact = await this.b24.findByPhone(phone);
+      console.log('🚀 ~ contact:', contact);
       if (contact?.length) {
         client.contact = contact[0].ID;
       } else {
@@ -123,7 +126,7 @@ export class ClientService implements IClientServiceInterface {
         ).toString();
       }
       const tittle = `Заказ от ${client.name} [${domen}]`;
-      const comment = `Заказ на сумму ${client.amount}. С сайта ${client.domen} [ Product: ${client?.product||"noname"} ]`;
+      const comment = `Заказ на сумму ${client.amount}. С сайта ${client.domen} [ Product: ${client?.product || 'noname'} ]`;
       client.deal = (
         await this.b24.createDeal(
           tittle,

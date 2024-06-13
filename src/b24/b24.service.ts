@@ -13,14 +13,22 @@ export class B24Service {
   }
 
   async getContactById(id: string): Promise<Contact> {
-    const { result } = await bitrix.contacts.get(`${id}`);
-    return result;  
+    try {
+      const result = await this.contactIsExist(+id);
+      return result;
+    } catch (error) {
+      return null;
+    }
   }
 
   async contactIsExist(id: number) {
-    const { result } = await bitrix.contacts.get(`${id}`);
-    if (!result.ID) throw new Error('Contact not created');
-    return result;
+    try {
+      const { result } = await bitrix.contacts.get(`${id}`);
+      if (!result.ID) throw new Error('Contact not  exist');
+      return result;
+    } catch (error) {
+      throw new Error('Contact not created');
+    }
   }
 
   async createContact(
