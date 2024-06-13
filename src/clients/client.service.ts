@@ -40,7 +40,7 @@ export class ClientService implements IClientServiceInterface {
     }
     if (client && client?.deal && !client?.isOpen) {
       // client = this.clientRep.create(createClientDto);
-      console.log("🚀 ~ client.contact:", client.contact)
+      console.log('🚀 ~ client.contact:', client.contact);
       const contact = await this.b24.getContactById(client.contact);
       if (!contact?.ID) {
         client.contact = (
@@ -164,6 +164,12 @@ export class ClientService implements IClientServiceInterface {
 
   async findAndClose(deal: string) {
     const client = await this.clientRep.findOneBy({ deal });
+    if (!client) {
+      throw new HttpException(
+        `Client with deal ${deal} not found`,
+        HttpStatus.NOT_FOUND,
+      );
+    }
     client.isOpen = false;
     await this.clientRep.save(client);
     return {
