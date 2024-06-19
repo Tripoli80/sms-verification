@@ -8,8 +8,9 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
     origin: [
-      // 'http://localhost:8000',
+      // 'http://localhost:3000',
       'https://dev.mrouter.com.ua',
+      'https://dev.mobua.com.ua/',
       'https://mrouter.com.ua',
       'https://mobua.com.ua',
     ], // разрешаем доступ только с этого источника
