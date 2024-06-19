@@ -10,7 +10,7 @@ async function bootstrap() {
     origin: [
       // 'http://localhost:3000',
       'https://dev.mrouter.com.ua',
-      'https://dev.mobua.com.ua/',
+      'https://dev.mobua.com.ua',
       'https://mrouter.com.ua',
       'https://mobua.com.ua',
     ], // разрешаем доступ только с этого источника
