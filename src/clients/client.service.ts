@@ -171,6 +171,10 @@ export class ClientService implements IClientServiceInterface {
       );
     }
     client.isOpen = false;
+    // client.deal = '';
+    client.amount = 0;
+    client.product = '';
+
     await this.clientRep.save(client);
     return {
       success: !!client,

@@ -9,6 +9,8 @@ export const sms = async (code: string, phone: string, alfa?: string) => {
     message: code + ' - CODE VERIFICATION ',
     src_addr: alfa ? alfa : process.env.ALFA,
   };
+  // console.log("🚀 ~ data:", data)
+  // return
 
   fetch(url, {
     method: 'POST',
