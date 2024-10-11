@@ -96,4 +96,13 @@ export class ConfirmSmsDTO {
   @IsString()
   @IsOptional()
   code: string;
+
+  @ApiProperty()
+  @IsString()
+  @IsOptional()
+  actionsrt: string;
+
+  // []
+  // else string properties
+  [key: string]: string;
 }

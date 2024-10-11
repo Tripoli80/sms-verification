@@ -95,7 +95,8 @@ export class ClientService implements IClientServiceInterface {
     };
   }
 
-  async confirmSMS({ phone, domen, code }: ConfirmSmsDTO) {
+  async confirmSMS(body: ConfirmSmsDTO) {
+    const { phone, code, domen } = body;
     const client = await this.isExistByPhone(phone, domen);
     if (!client) {
       throw new HttpException('Client not found', HttpStatus.NOT_FOUND);
@@ -117,7 +118,6 @@ export class ClientService implements IClientServiceInterface {
       client.confirmed = true;
       client.isOpen = true;
       const contact = await this.b24.findByPhone(phone);
-      console.log('🚀 ~ contact:', contact);
       if (contact?.length) {
         client.contact = contact[0].ID;
       } else {
@@ -125,8 +125,8 @@ export class ClientService implements IClientServiceInterface {
           await this.b24.createContact(client.name, client.phone, client.domen)
         ).toString();
       }
-      const tittle = `Заказ от ${client.name} [${domen}]`;
-      const comment = `Заказ на сумму ${client.amount}. С сайта ${client.domen} [ Product: ${client?.product || 'noname'} ]`;
+      const tittle = `Заказ от ${client.name} [${domen}] - ${body.actionsrt}`;
+      const comment = `Заказ на сумму ${client.amount}. С сайта ${client.domen} [ Product: ${client?.product || 'noname'} ]. Вибор доставки/интернета: ${body.actionsrt}`;
       client.deal = (
         await this.b24.createDeal(
           tittle,
