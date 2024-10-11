@@ -51,8 +51,8 @@ export class ClientService implements IClientServiceInterface {
       client.confirmed = true;
       client.isOpen = true;
 
-      const tittle = `Заказ от ${client.name} [${client.domen}] - ${client?.actionsrt ? client.actionsrt : ''}`;
-      const comment = `Заказ на сумму ${client.amount}. С сайта ${client.domen} [ Product: ${client?.product || 'noname'} ]. Вибор доставки/интернета: ${client.actionsrt ? client.actionsrt : ''}`;
+      const tittle = `Заказ от ${client.name} [${createClientDto.domen}] - ${createClientDto?.actionsrt ? createClientDto.actionsrt : ''}`;
+      const comment = `Заказ на сумму ${createClientDto.amount}. С сайта ${createClientDto.domen} [ Product: ${createClientDto?.product || 'noname'} ]. Вибор доставки/интернета: ${createClientDto.actionsrt ? createClientDto.actionsrt : ''}`;
 
       client.deal = (
         await this.b24.createDeal(
@@ -127,8 +127,8 @@ export class ClientService implements IClientServiceInterface {
           await this.b24.createContact(client.name, client.phone, client.domen)
         ).toString();
       }
-      const tittle = `Заказ от ${client.name} [${domen}] - ${body.actionsrt}`;
-      const comment = `Заказ на сумму ${client.amount}. С сайта ${client.domen} [ Product: ${client?.product || 'noname'} ]. Вибор доставки/интернета: ${body.actionsrt}`;
+      const tittle = `Заказ от ${client.name} [${domen}]`;
+      const comment = `Заказ на сумму ${client.amount}. С сайта ${client.domen} [ Product: ${client?.product || 'noname'} ]`;
 
       client.deal = (
         await this.b24.createDeal(

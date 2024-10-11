@@ -46,6 +46,11 @@ export class CreateClientDto implements Partial<Client> {
   @IsString()
   @IsOptional()
   product: string;
+
+  @ApiProperty()
+  @IsString()
+  @IsOptional()
+  actionsrt: string;
 }
 
 export class UpdateClientDto implements Partial<Client> {
@@ -78,6 +83,11 @@ export class UpdateClientDto implements Partial<Client> {
   @IsString()
   @IsOptional()
   product: string;
+  
+  @ApiProperty()
+  @IsString()
+  @IsOptional()
+  actionsrt: string;
 }
 
 export class ConfirmSmsDTO {
@@ -101,6 +111,7 @@ export class ConfirmSmsDTO {
   @IsString()
   @IsOptional()
   actionsrt: string;
+
 
   // []
   // else string properties

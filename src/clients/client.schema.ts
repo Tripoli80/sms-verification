@@ -1,5 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class Client {
@@ -51,7 +57,7 @@ export class Client {
   @ApiProperty()
   amount: number;
 
-  @Column( { type: String, default:"" })
+  @Column({ type: String, default: '' })
   @ApiProperty()
   product: string;
 
