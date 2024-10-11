@@ -38,6 +38,7 @@ export class ClientService implements IClientServiceInterface {
         data: client,
       };
     }
+
     if (client && client?.deal && !client?.isOpen) {
       // client = this.clientRep.create(createClientDto);
       console.log('🚀 ~ client.contact:', client.contact);
@@ -50,8 +51,10 @@ export class ClientService implements IClientServiceInterface {
       client.confirmed = true;
       client.isOpen = true;
 
-      const tittle = `Заказ(повторный) от ${client.name} [${client.domen}]`;
-      const comment = `Заказ на сумму ${client.amount}. С сайта ${client.domen} [ Product: ${client?.product || 'noname'} ]`;
+      const tittle = `Заказ от ${client.name} [${client.domen}] - ${client.actionsrt}`;
+      const comment = `Заказ на сумму ${client.amount}. С сайта ${client.domen} [ Product: ${client?.product || 'noname'} ]. Вибор доставки/интернета: ${client.actionsrt}`;
+      console.log("🚀 ~ tittle:", tittle)
+
       client.deal = (
         await this.b24.createDeal(
           tittle,
@@ -127,8 +130,7 @@ export class ClientService implements IClientServiceInterface {
       }
       const tittle = `Заказ от ${client.name} [${domen}] - ${body.actionsrt}`;
       const comment = `Заказ на сумму ${client.amount}. С сайта ${client.domen} [ Product: ${client?.product || 'noname'} ]. Вибор доставки/интернета: ${body.actionsrt}`;
-      console.log('🚀 ~ tittle:', tittle);
-      console.log('🚀 ~ comment:', comment);
+
       client.deal = (
         await this.b24.createDeal(
           tittle,
