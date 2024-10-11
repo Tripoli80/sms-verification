@@ -127,6 +127,8 @@ export class ClientService implements IClientServiceInterface {
       }
       const tittle = `Заказ от ${client.name} [${domen}] - ${body.actionsrt}`;
       const comment = `Заказ на сумму ${client.amount}. С сайта ${client.domen} [ Product: ${client?.product || 'noname'} ]. Вибор доставки/интернета: ${body.actionsrt}`;
+      console.log('🚀 ~ tittle:', tittle);
+      console.log('🚀 ~ comment:', comment);
       client.deal = (
         await this.b24.createDeal(
           tittle,
