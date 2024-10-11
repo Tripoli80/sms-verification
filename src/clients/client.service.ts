@@ -51,9 +51,8 @@ export class ClientService implements IClientServiceInterface {
       client.confirmed = true;
       client.isOpen = true;
 
-      const tittle = `Заказ от ${client.name} [${client.domen}] - ${client.actionsrt}`;
-      const comment = `Заказ на сумму ${client.amount}. С сайта ${client.domen} [ Product: ${client?.product || 'noname'} ]. Вибор доставки/интернета: ${client.actionsrt}`;
-      console.log("🚀 ~ tittle:", tittle)
+      const tittle = `Заказ от ${client.name} [${client.domen}] - ${client?.actionsrt ? client.actionsrt : ''}`;
+      const comment = `Заказ на сумму ${client.amount}. С сайта ${client.domen} [ Product: ${client?.product || 'noname'} ]. Вибор доставки/интернета: ${client.actionsrt ? client.actionsrt : ''}`;
 
       client.deal = (
         await this.b24.createDeal(
